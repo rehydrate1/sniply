@@ -1,21 +1,53 @@
 {{define "base"}}
 <!doctype html>
-<html lang='en'>
+<html lang='ru'> {{/* Изменен язык на русский для примера */}}
     <head>
         <meta charset='utf-8'>
-        <title>SNIPLY - {{template "title" .}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> {{/* Важно для адаптивности */}}
+        <title>SNIPLY | {{template "title" .}}</title>
+
+        {{/* Подключаем шрифты */}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Ubuntu+Mono:400;700&display=swap" rel="stylesheet">
+
+        <link rel='stylesheet' href='/static/css/main.css'>
+        <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon'>
     </head>
     <body>
         <header>
-            <h1><a href='/'>SNIPLY</a></h1>
+             <div class="container"> {{/* Добавляем контейнер для выравнивания */}}
+                <h1><a href='/'>SNIPLY</a></h1>
+            </div>
         </header>
+
         <nav>
-            <a href='/'>Домашняя страница</a>
+            <div class="container"> {{/* Добавляем контейнер для выравнивания */}}
+                {{/* Можно разделить навигацию для лучшей адаптивности */}}
+                <div class="nav-main">
+                    <a href='/'>Домашняя страница</a>
+                    {{/* Другие основные ссылки сюда */}}
+                </div>
+                 <div class="nav-auth">
+                    {{/* Ссылки типа "Вход", "Регистрация" сюда */}}
+                 </div>
+            </div>
         </nav>
+
         <main>
-            {{template "main" .}}
+            <div class="container"> {{/* Добавляем контейнер для выравнивания */}}
+                {{/* Показываем Flash сообщения здесь, если они есть */}}
+                {{with .Flash}}
+                <div class='flash'>{{.}}</div>
+                {{end}}
+
+                {{template "main" .}}
+            </div>
         </main>
+
         {{template "footer" .}}
+
+        <script src='/static/js/main.js' type='text/javascript'></script>
     </body>
 </html>
 {{end}}
