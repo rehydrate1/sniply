@@ -8,6 +8,11 @@ import (
 	"path/filepath"
 )
 
+type application struct {
+	errorLog *log.Logger
+	infoLog *log.Logger
+}
+
 func main() {
 	addr := flag.String("addr", ":8080", "Сетевой адрес HTTP")
 	flag.Parse()
@@ -15,10 +20,15 @@ func main() {
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
+	app := &application{
+		errorLog: errorLog,
+		infoLog: infoLog,
+	}
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/snippet/{id}", showSnippet)
-	mux.HandleFunc("POST /snippet/create", createSnippet)
+	mux.HandleFunc("/", app.home)
+	mux.HandleFunc("/snippet/{id}", app.showSnippet)
+	mux.HandleFunc("POST /snippet/create", app.createSnippet)
 
 	fileServer := http.FileServer(neuteredFileSystem{http.Dir("./ui/static")})
 	mux.Handle("/static", http.NotFoundHandler())
