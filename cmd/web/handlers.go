@@ -42,6 +42,16 @@ func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Отображение заметки с ID %d", id)
 }
 
-func (app application) createSnippet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Создание заметки"))
+func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
+	title := "Слабые мужчины ищут оправдания"
+	content := "Слабые мужчины ищут оправдания, настоящий мужик подготовил их заранее."
+	expires := "7"
+
+	id ,err := app.snippets.Insert(title, content, expires)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	http.Redirect(w, r, fmt.Sprintf("/snippet/%d", id), http.StatusSeeOther)
 }
