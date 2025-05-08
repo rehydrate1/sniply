@@ -18,7 +18,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		"./ui/html/base.layout.tmpl",
 		"./ui/html/footer.partial.tmpl",
 	}
-	
+
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
 		app.serverError(w, err)
@@ -42,6 +42,6 @@ func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Отображение заметки с ID %d", id)
 }
 
-func (app application) createSnippet(w http.ResponseWriter, r * http.Request) {
+func (app application) createSnippet(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Создание заметки"))
 }
