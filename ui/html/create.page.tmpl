@@ -1,0 +1,48 @@
+{{template "base" .}}
+{{define "title"}}Создание новой заметки{{end}}
+
+{{define "main"}}
+<form action='/snippet/create' method='POST'>
+    <div>
+        <label for='title'>Заголовок:</label>
+        {{/* Используем .Form.Get "title" для повторного заполнения, если была ошибка */}}
+        <input type='text' name='title' id='title' value='{{.Form.Get "title"}}'>
+        {{/* Отображение ошибки для поля title */}}
+        {{with .Errors.title}}
+            <label class='error'>{{.}}</label>
+        {{end}}
+    </div>
+    <div>
+        <label for='content'>Содержимое:</label>
+        {{/* Используем .Form.Get "content" для textarea */}}
+        <textarea name='content' id='content' rows='10'>{{.Form.Get "content"}}</textarea>
+        {{/* Отображение ошибки для поля content */}}
+        {{with .Errors.content}}
+            <label class='error'>{{.}}</label>
+        {{end}}
+    </div>
+    <div>
+        <label>Срок хранения:</label>
+        <div class="radio-group">
+            <div class="radio-item">
+                <input type='radio' name='expires' value='365' id='exp365' {{if eq (.Form.Get "expires") "365"}}checked{{end}}>
+                <label for='exp365' class='radio-label'>Один год</label>
+            </div>
+            <div class="radio-item">
+                <input type='radio' name='expires' value='7' id='exp7' {{if or (eq (.Form.Get "expires") "7") (eq (.Form.Get "expires") "")}}checked{{end}}>
+                <label for='exp7' class='radio-label'>Одна неделя</label>
+            </div>
+            <div class="radio-item">
+                <input type='radio' name='expires' value='1' id='exp1' {{if eq (.Form.Get "expires") "1"}}checked{{end}}>
+                <label for='exp1' class='radio-label'>Один день</label>
+            </div>
+        </div>
+        {{with .Errors.expires}}
+            <label class='error'>{{.}}</label>
+        {{end}}
+    </div>
+    <div>
+        <input type='submit' value='Создать заметку'>
+    </div>
+</form>
+{{end}}

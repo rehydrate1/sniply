@@ -370,6 +370,26 @@
       color: var(--link-hover-color);
       text-decoration: underline;
   }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .radio-item {
+    display: flex;
+    align-items: center; 
+    gap: 5px; /* Пространство между input и label */
+    }
+
+    .radio-item input[type="radio"] {
+    margin-right: 8px; /* Отступ между самим чекбоксом и его меткой */
+    /* Чтобы немного "приподнять" чекбокс относительно текста метки,
+       если align-items: center не идеально, можно использовать: */
+    /* vertical-align: middle; Иногда работает для inline-flex или inline-block */
+    /* Или небольшой отрицательный margin, но это менее предпочтительно: */
+    margin-bottom: 5px; /* Подбирается экспериментально */
+}
   
   /* Стили для ошибок валидации формы */
   label.error {

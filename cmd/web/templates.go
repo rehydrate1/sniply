@@ -1,14 +1,18 @@
 package main
 
 import (
-	"github.com/rehydrate1/sniply/pkg/models"
 	"html/template"
+	"net/url"
 	"path/filepath"
+
+	"github.com/rehydrate1/sniply/pkg/models"
 )
 
 type templateData struct {
 	Snippet  *models.Snippet
 	Snippets []*models.Snippet
+	Form url.Values
+	Errors map[string]string
 }
 
 func newTemplateCache(dir string) (map[string]*template.Template, error) {
