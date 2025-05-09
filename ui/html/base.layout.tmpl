@@ -1,9 +1,9 @@
 {{define "base"}}
 <!doctype html>
-<html lang='ru'> {{/* Изменен язык на русский для примера */}}
+<html lang='ru'>
     <head>
         <meta charset='utf-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1"> {{/* Важно для адаптивности */}}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>SNIPLY | {{template "title" .}}</title>
 
         {{/* Подключаем шрифты */}}
@@ -16,17 +16,16 @@
     </head>
     <body>
         <header>
-             <div class="container"> {{/* Добавляем контейнер для выравнивания */}}
+             <div class="container">
                 <h1><a href='/'>SNIPLY</a></h1>
             </div>
         </header>
 
         <nav>
-            <div class="container"> {{/* Добавляем контейнер для выравнивания */}}
-                {{/* Можно разделить навигацию для лучшей адаптивности */}}
+            <div class="container">
                 <div class="nav-main">
                     <a href='/'>Домашняя страница</a>
-                    {{/* Другие основные ссылки сюда */}}
+                    <a href='/snippet/create'>Новая заметка</a>
                 </div>
                  <div class="nav-auth">
                     {{/* Ссылки типа "Вход", "Регистрация" сюда */}}
@@ -35,8 +34,7 @@
         </nav>
 
         <main>
-            <div class="container"> {{/* Добавляем контейнер для выравнивания */}}
-
+            <div class="container"> 
                 {{template "main" .}}
             </div>
         </main>
