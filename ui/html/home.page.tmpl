@@ -14,36 +14,15 @@
                 <th>ID</th>
             </tr>
         </thead>
-        <tbody>
-            {{range .Snippets}}
-            <tr>
-                <td><a href='/snippet/view/{{.ID}}'>{{.Title}}</a></td>
-                <td>#{{.ID}}</td>
-            </tr>
-            {{end}}
-        </tbody>
+        {{range .Snippets}}
+        <tr>
+            <td><a href='/snippet/{{.ID}}'>{{.Title}}</a></td>
+            <td>{{.Created}}</td>
+            <td>#{{.ID}}</td>
+        </tr>
+        {{end}}
     </table>
     {{else}}
     <p>Пока здесь ничего нет. Почему бы не <a href='/snippet/create'>создать заметку</a>?</p>
     {{end}}
-
-    {{/* Пример стилизованной заметки, если бы мы показывали ее здесь */}}
-    <div class="snippet">
-        <div class="metadata">
-            <strong>Пример названия</strong>
-            <span>#1</span>
-        </div>
-        <pre><code>package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Тест")
-}</code></pre>
-        <div class="metadata">
-            <time>Создано: 10 Авг 2023 в 14:30</time>
-            <time>Истекает: 17 Авг 2023 в 14:30</time>
-        </div>
-    </div>
-
 {{end}}
